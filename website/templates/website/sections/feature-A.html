@@ -1,0 +1,64 @@
+{% load static %}
+
+<section class="home-features">
+    <div class="container ps-md-0">
+        <div class="row align-items-center">
+
+            <!-- IMAGE PRINCIPALE -->
+            <div class="col-12 col-lg-6 animated" data-animation="fadeInUp" data-animation-delay="200">
+                {% if feature_header and feature_header.image %}
+                    <img src="{{ feature_header.image.url }}" class="img-fluid" alt="">
+                {% else %}
+                    <img src="{% static 'website/assets/imgs/features/big.jpg' %}" class="img-fluid" alt="">
+                {% endif %}
+            </div>
+
+            <!-- TEXTES + ACCORDÉON -->
+            <div class="col-12 col-lg-6">
+                <div class="block animated" data-animation="fadeInUp" data-animation-delay="400">
+
+                    <div class="herotext">
+                        {% if feature_header %}
+                            <div class="rightline pb-3"><span>{{ feature_header.small_title }}</span></div>
+                            <h2>{{ feature_header.big_title }}</h2>
+                            <h5 class="pt-2">{{ feature_header.subtitle }}</h5>
+                        {% endif %}
+                    </div>
+
+                    <div class="accordion pt-3" id="accordionServices">
+                        {% for item in feature_items %}
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="serviceHeading{{ forloop.counter }}">
+                                    <button class="accordion-button {% if not forloop.first %}collapsed{% endif %}" 
+                                            type="button" 
+                                            data-bs-toggle="collapse" 
+                                            data-bs-target="#serviceCollapse{{ forloop.counter }}" 
+                                            aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}" 
+                                            aria-controls="serviceCollapse{{ forloop.counter }}">
+                                        {{ item.titre }}
+                                    </button>
+                                </h2>
+
+                                <div id="serviceCollapse{{ forloop.counter }}" 
+                                     class="accordion-collapse collapse {% if forloop.first %}show{% endif %}" 
+                                     aria-labelledby="serviceHeading{{ forloop.counter }}" 
+                                     data-bs-parent="#accordionServices">
+
+                                    <div class="accordion-body">
+                                        {% if item.image %}
+                                            <img src="{{ item.image.url }}" class="me-3" style="width:50px; height:50px;">
+                                        {% endif %}
+                                        {{ item.description }}
+                                    </div>
+
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

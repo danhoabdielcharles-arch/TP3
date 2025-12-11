@@ -1,0 +1,37 @@
+
+
+<!-- INNER BANNER STARTS
+            ========================================================================= -->
+    {% for banner in banners %}
+             <div class="inner-banner-style blog-post-banner" id="top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="info text-center animated" data-animation="fadeInUp" data-animation-delay="300">
+                            <div class="lrline pb-3"><span>{{banner.titre}}</span></div>
+                            <h2>
+                                >{{banner.description1}} <br class="d-none d-lg-block" >
+                                {{banner.description2}}
+                            </h2>
+                            <ul class="meta">
+                                <li>
+                                    <a href=""><i class="las la-user-alt"></i> John</a>
+                                </li>
+                                <li>
+                                    <a href=""><i class="las la-calendar"></i> 10 Jan, 2020</a>
+                                </li>
+                                <li>
+                                    <a href=""><i class="lar la-comment"></i> 3</a>
+                                </li>
+                                <li>
+                                    <a href=""><i class="lar la-eye"></i> 5.5K</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+        <!-- /. INNER BANNER ENDS
+            ========================================================================= -->

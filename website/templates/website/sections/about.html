@@ -1,53 +1,91 @@
 {% load static %}
 
-<!-- ABOUT US STARTS -->
+    <!-- ABOUT US STARTS -->
 <section class="home-intro" id="about">
     <div class="container">
-        <div class="row align-items-center pb-5">
+            <div class="row align-items-center pb-5">
 
-            <!-- Image principale -->
-            <div class="col-12 col-lg-5 pt-4 pt-lg-0 animated" data-animation="fadeInUp" data-animation-delay="350">
-                <img src="{% static 'website/assets/imgs/about/pic1.png' %}" class="img-fluid pic" alt="">
+              <!-- Image principale -->
+              <div class="col-12 col-lg-5 pt-4 pt-lg-0 animated" data-animation="fadeInUp" data-animation-delay="350">
+                {% if about and about.image %}
+                  <img src="{{ about.image.url }}" class="img-fluid pic" alt="{{ about.titre }}">
+                {% else %}
+                  <img src="{% static 'website/assets/imgs/about/pic1.png' %}" class="img-fluid pic" alt="Image par défaut">
+                {% endif %}
             </div>
 
             <!-- Texte principal -->
             <div class="col-12 col-lg-6 offset-lg-1">
+                {% if about %}
                 <div class="herotext animated" data-animation="fadeInUp" data-animation-delay="100">
                     <div class="rightline pb-3">
                         <span>{{ about.section_title }}</span>
                     </div>
 
-                    <h2>{{ about.about_title }}</h2>
+                    <h2>{{ about.titre }}</h2>
 
                     <h5 class="pt-2">
                         {{ about.description }}
                         <br><br>
-                        <strong>{{ about.about_author }}</strong><br>
-                        {{ about.about_fonction }}
+                        <strong>{{ about.auteur }}</strong><br>
+                        {{ about.fonction }}
                     </h5>
                 </div>
+                {% else %}
+                <div class="herotext animated" data-animation="fadeInUp" data-animation-delay="100">
+                    <p>Aucune donnée disponible pour cette page.</p>
+                </div>
+                {% endif %}
             </div>
         </div>
 
-        <!-- Services dynamiques -->
+        <!-- Services statiques (car le modèle About n'a pas de relation avec les services) -->
         <div class="row pt-5">
-            {% for service in about.about_service %}
-                <div class="col-12 col-lg-4">
-                    <div class="service-block animated" data-animation="fadeInUp" data-animation-delay="{{ 200|add:forloop.counter0|add:forloop.counter0|add:forloop.counter0 }}">
-                        <div class="pt-1 pb-5">
-                            <div class="info">
-                                <div class="icon">
-                                    <img src="{% static 'website/assets/imgs/about/' %}{{ service.img }}" alt="">
-                                </div>
-                                <div class="text">
-                                    <h4>{{ service.title }}</h4>
-                                    <div>{{ service.description }}</div>
-                                </div>
+            <div class="col-12 col-lg-4">
+                <div class="service-block animated" data-animation="fadeInUp" data-animation-delay="200">
+                    <div class="pt-1 pb-5">
+                        <div class="info">
+                            <div class="icon">
+                                <img src="{% static 'website/assets/imgs/about/1.svg' %}" alt="">
+                            </div>
+                            <div class="text">
+                                <h4>100% Satisfaction</h4>
+                                <div>Lorem Ipsum</div>
                             </div>
                         </div>
                     </div>
                 </div>
-            {% endfor %}
+            </div>
+            <div class="col-12 col-lg-4">
+                <div class="service-block animated" data-animation="fadeInUp" data-animation-delay="300">
+                    <div class="pt-1 pb-5">
+                        <div class="info">
+                            <div class="icon">
+                                <img src="{% static 'website/assets/imgs/about/3.svg' %}" alt="">
+                            </div>
+                            <div class="text">
+                                <h4>Fast Delivery</h4>
+                                <div>Lorem Ipsum</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4">
+                <div class="service-block animated" data-animation="fadeInUp" data-animation-delay="400">
+                    <div class="pt-1 pb-5">
+                        <div class="info">
+                            <div class="icon">
+                                <img src="{% static 'website/assets/imgs/about/2.svg' %}" alt="">
+                            </div>
+                            <div class="text">
+                                <h4>24x7 Service</h4>
+                                <div>Lorem Ipsum</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>

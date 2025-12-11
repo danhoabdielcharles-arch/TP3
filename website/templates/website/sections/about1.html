@@ -6,15 +6,13 @@
             <div class="container">
                 <div class="row align-items-center pb-5">
                     <div class="col-12 col-lg-5 pt-4 pt-lg-0 animated" data-animation="fadeInUp" data-animation-delay="350">
-                        <img src="{% static 'website/assets/imgs/about/pic1.png' %}" class="img-fluid pic" alt="">
+                        <img src="{{ about.image.url }}" class="img-fluid pic" alt="">
                     </div>
                     <div class="col-12 col-lg-6 offset-lg-1">
                         <div class="herotext animated" data-animation="fadeInUp" data-animation-delay="100">
-                            <div class="rightline pb-3"><span>{{ about[section_title] }}</span></div>
-                            <h2>Making transportation<br> fast and safe</h2>
-                            <h5 class="pt-2">Lorem Ipsum is simply dummy  text of the printing and typesetting industry. lorem Ipsum has been the industry standard dummy text ever since the when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                                <br><br><strong>Tom Henders</strong><br>CEO of Company
-                            </h5>
+                            <div class="rightline pb-3">Since 1998<span>{{ about.section_title }}</span></div>
+                            <h2>{{ about.titre }}</h2>
+                            <h5 class="pt-2">{{ about.description }}<br><br><strong>{{ about.auteur }}</strong><br>{{ about.fonction }}</h5>
                         </div>
                     </div>
                 </div>

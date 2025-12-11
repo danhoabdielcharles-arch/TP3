@@ -1,97 +1,105 @@
 # tp3/website/views.py
-from django.shortcuts import render
+from django.shortcuts import render # type: ignore
+from .models import slider, banner3, About, banner, Services, ServiceHeader, FeatureHeader
+
 
 def index(request):
+    feature_header = FeatureHeader.objects.filter(page='index').first()
+    feature_items = feature_header.items.all() if feature_header else []
+
     context = {
         'title': 'index',
-        'about': get_about()
+
+        # bannière
+        'banners': banner.objects.filter(page='index'),
+
+        # slider
+        'sliders': slider.objects.all(),
+
+        # about
+        'about': About.objects.filter(page='index').first(),
+
+        # services
+        'services': Services.objects.filter(actif=True).order_by('ordre'),
+        'service_header': ServiceHeader.objects.filter(page='index').first(),
+
+         'feature_header': feature_header, 
+         'feature_items': feature_items,
+ 
     }
+
     return render(request, 'website/index.html', context)
 
+
 def about(request):
+    banners = banner.objects.filter(page='about')
+    about_data = About.objects.filter(page='about').first()
 
     context = {
-        'title': 'index',
-        'about': get_about()
+        'title': 'about',
+        'about': about_data,
+        'banners': banners,
     }
     return render(request, 'website/about.html', context)
 
 def contact(request):
-    return render(request, 'website/contact.html')
+    banners = banner.objects.filter(page='contact')
+    return render(request, 'website/contact.html', {'banners': banners})
 
 def services(request):
-   return render(request, 'website/services.html')
+    banners = banner.objects.filter(page='services')
+    about_data = About.objects.filter(page='services').first()
+    feature_header = FeatureHeader.objects.filter(page='services').first()
+    feature_items = feature_header.items.all() if feature_header else []
+    context = {
+        'about': about_data,
+        'banners': banners,
+        'services': Services.objects.filter(actif=True).order_by('ordre'),
+        'service_header': ServiceHeader.objects.filter(page='services').first(),
+        'feature_header': feature_header, 
+        'feature_items': feature_items,
+    }
+    return render(request, 'website/our-services.html', context)
 
 def pricing(request):
-   return render(request, 'website/pricing.html')
+    banners = banner.objects.filter(page='pricing')
+    return render(request, 'website/pricing.html', {'banners': banners})
 
 def servicesdetail(request):
-    return render(request, 'website/servicesdetail.html')
+    banners = banner.objects.filter(page='servicesdetail')
+    return render(request, 'website/servicesdetail.html', {'banners': banners})
 
-def gallery (request):
-    return render(request, 'website/gallery.html')
+def gallery(request):
+    banners = banner.objects.filter(page='gallery')
+    return render(request, 'website/gallery.html', {'banners': banners})
 
-def blog (request):
-    return render(request, 'website/blog.html')
+def blog(request):
+    banners = banner.objects.filter(page='blog')
+    return render(request, 'website/blog.html', {'banners': banners})
 
-def base (request):
-    return render(request, 'website/base.html')
+def base(request):
+    banners = banner.objects.filter(page='base')
+    return render(request, 'website/base.html', {'banners': banners})
+
+def team(request):
+    banners = banner.objects.filter(page='team')
+    return render(request, 'website/team.html', {'banners': banners})
 
 def singleblogpostleftsidebar(request):
-    return render(request, 'website/singleblogpostleftsidebar.html')
+    banners = banner.objects.filter(page='singleblogpostleftsidebar')
+    banners3_item = banner3.objects.filter(page='singleblogpostleftsidebar'). first()
+    return render(request, 'website/singleblogpostleftsidebar.html', {'banners': banners, 'banners3_item': banners3_item})
 
-def singleblogpostrightsidebar (request):
-    return render(request, 'website/singleblogpostrightsidebar.html')
+def singleblogpostrightsidebar(request):
+    banners = banner.objects.filter(page='singleblogpostrightsidebar')
+    banners3_item = banner3.objects.filter(page='singleblogpostrightsidebar'). first()
+    return render(request, 'website/single-blog-post-rightsidebar.html', {'banners': banners, 'banners3_item': banners3_item})
 
-def singleblogpostwithoutsidebar (request):
-    return render(request, 'website/singleblogpostwithoutsidebar.html')
-
-#def (request):
-#   return render(request, 'website/.html')
-
-#def (request):
- #   return render(request, 'website/.html')
-
-
+def singleblogpostwithoutsidebar(request):
+    banners = banner.objects.filter(page='singleblogpostwithoutsidebar')
+    banners3_item = banner3.objects.filter(page='singleblogpostwithoutsidebar'). first()
+    return render(request, 'website/singleblogpostwithoutsidebar.html', {'banners': banners, 'banners3_item': banners3_item})
 
 
 
-
-
-
-
-def get_about():
-    data = {
-        'section_title': 'Since 1998',
-        'about_title': 'Making transportation fast and safe',
-        'description': """
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-            lorem Ipsum has been the industry standard dummy text ever since 
-            the when an unknown printer took a galley of type 
-            and scrambled it to make a type specimen book.
-        """,
-        'about_author': 'Toto Titi',
-        'about_fonction': "Directeur General",
-        'about_service':[
-            {
-                'img':'1.svg',
-                'title':'Fast Deliver',
-                'description':'Lorem Ipsum',
-                'order':1,
-            },
-            {
-                'img':'1.svg',
-                'title':'100% Satifaction',
-                'description':'Lorem Ipsum',
-                'order':2,
-            },
-            {
-                'img':'3.svg',
-                'title':'24x7 Service',
-                'description':'Lorem Ipsum',
-                'order':3,
-            },
-        ]
-    }
-    return data
 

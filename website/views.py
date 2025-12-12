@@ -11,7 +11,7 @@ def index(request):
         'title': 'index',
 
         # bannière
-        'banners': banner.objects.filter(page='index'),
+         'banners': banner.objects.filter(page='index'),
 
         # slider
         'sliders': slider.objects.all(),
@@ -49,17 +49,24 @@ def contact(request):
 def services(request):
     banners = banner.objects.filter(page='services')
     about_data = About.objects.filter(page='services').first()
+    
     feature_header = FeatureHeader.objects.filter(page='services').first()
     feature_items = feature_header.items.all() if feature_header else []
+    
+    service_header = ServiceHeader.objects.filter(page='services').first()
+    services_list = Services.objects.filter(actif=True).order_by('ordre')
+    
     context = {
         'about': about_data,
         'banners': banners,
-        'services': Services.objects.filter(actif=True).order_by('ordre'),
-        'service_header': ServiceHeader.objects.filter(page='services').first(),
-        'feature_header': feature_header, 
+        'services': services_list,
+        'service_header': service_header,
+        'feature_header': feature_header,
         'feature_items': feature_items,
     }
+    
     return render(request, 'website/our-services.html', context)
+
 
 def pricing(request):
     banners = banner.objects.filter(page='pricing')

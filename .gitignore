@@ -1,0 +1,21 @@
+# Environnements virtuels
+env/
+*.pyc
+__pycache__/
+
+# Base de données
+db.sqlite3
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+
+# Dossier staticfiles collectés
+/staticfiles/
+
+# Logs
+*.log
+
+# IDE / éditeurs
+.vscode/
+.idea/
